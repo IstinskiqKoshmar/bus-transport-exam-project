@@ -1,3 +1,15 @@
 @model IEnumerable<Carrier>
-@{ ViewData["Title"] = "??????????"; }
-<section class="page-head"><span class="eyebrow">?????? ?????????</span><h1>????????? ??????????</h1><p>?????, ???????? ? ????????? ?? ????????? ???????.</p></section><section class="content-wrap"><div class="info-grid">@foreach(var carrier in Model){<article><span class="carrier-logo large">@carrier.CompanyCode</span><h3>@carrier.Name</h3><p>@carrier.Country</p><small>@carrier.Phone</small></article>}</div></section>
+@{ ViewData["Title"] = "Превозвачи"; }
+<section class="page-head">
+  <span class="eyebrow">НАШИТЕ ПАРТНЬОРИ</span>
+  <h1>Автобусни превозвачи</h1>
+  <p>Фирми, включени в системата за автобусни превози.</p>
+</section>
+<section class="content-wrap">
+  <div class="info-grid">
+  @foreach (var carrier in Model)
+  {
+    <article><span class="carrier-logo large">@carrier.CompanyCode</span><h3>@carrier.Name</h3><p>@carrier.Country</p><small>@carrier.Phone</small></article>
+  }
+  </div>
+</section>

@@ -1,5 +1,79 @@
 @model HomeViewModel
-@{ ViewData["Title"] = "??????"; }
-<section class="hero"><div class="hero-copy"><span class="eyebrow">????? ??????? ??????? ???</span><h1>?????? ??????????<br/><em>????????? ????????.</em></h1><p>?????? ????????, ??????, ???????? ????? ? ????. ?????????? ????? ????? ? ????? ??????? ?? ??????????.</p></div><div class="sky-card"><div class="plane">??</div><div class="route-line"></div><span>SOF</span><b>????????</b></div></section>
-<section class="search-shell"><form asp-action="Search" method="get" class="search-form"><div class="trip-choice"><label><input type="radio" name="tripType" value="oneway" checked/> ???????????</label><label><input type="radio" name="tripType" value="roundtrip"/> ??????????</label></div><div class="search-grid"><label>??<select name="from" required><option value="">???? ??? ????????</option>@foreach(var city in Model.Cities){<option value="@city.Code">@city.CityName (@city.Code)</option>}</select></label><label>??<select name="to" required><option value="">???? ??? ????????</option>@foreach(var city in Model.Cities){<option value="@city.Code">@city.CityName (@city.Code)</option>}</select></label><label>??????????<input type="date" name="date" value="2026-06-25" required/></label><label>???????<input type="date" name="returnDate" value="2026-06-28"/></label><label>???????<input type="number" name="passengers" value="1" min="1" max="9"/></label><button class="primary" type="submit">????? ??????? ?</button></div></form></section>
-<section class="section"><div class="section-title"><div><span class="eyebrow">??????? ???????????</span><h2>????????? ????????? ????????</h2></div><a asp-controller="Trips" asp-action="Index">??? ?????? ?</a></div><div class="trip-grid">@foreach(var trip in Model.FeaturedTrips){<article class="trip-card"><div class="trip-top"><span>@trip.Carrier.Name</span><b>@trip.TripCode</b></div><div class="route"><div><strong>@trip.DepartureCity.Code</strong><small>@trip.DepartureTime.ToString("HH:mm")</small></div><div class="route-mid">??<hr/><small>@(trip.HasIntermediateStops ? "? ???????? ??????" : "????????")</small></div><div><strong>@trip.ArrivalCity.Code</strong><small>@trip.ArrivalTime.ToString("HH:mm")</small></div></div><div class="price"><span>??</span><b>@trip.Price.ToString("0") ??.</b><a asp-controller="Tickets" asp-action="Book" asp-route-tripId="@trip.Id">??????</a></div></article>}</div><div class="stats"><div><b>@Model.TripCount+</b><span>??????? ?????????</span></div><div><b>@Model.Cities.Count</b><span>????????</span></div><div><b>@Model.Carriers.Count</b><span>??????????</span></div><div><b>@Model.TicketCount</b><span>??????</span></div></div></section>
+@{ ViewData["Title"] = "Начало"; }
+
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">ТВОЯТ МАРШРУТ ЗАПОЧВА ТУК</span>
+    <h1>Намери следващото<br /><em>автобусно пътуване.</em></h1>
+    <p>Сравни маршрути, часове, свободни места и цени. Резервирай билет бързо и следи статуса на пътуването.</p>
+  </div>
+  <div class="sky-card">
+    <div class="plane">BUS</div>
+    <div class="route-line"></div>
+    <span>SOF</span>
+    <b>България</b>
+  </div>
+</section>
+
+<section class="search-shell">
+  <form asp-action="Search" method="get" class="search-form">
+    <div class="trip-choice">
+      <label><input type="radio" name="tripType" value="oneway" checked /> Еднопосочен</label>
+      <label><input type="radio" name="tripType" value="roundtrip" /> Двупосочен</label>
+    </div>
+    <div class="search-grid">
+      <label>От
+        <select name="from" required>
+          <option value="">Град или автогара</option>
+          @foreach (var city in Model.Cities)
+          {
+              <option value="@city.Code">@city.CityName (@city.Code)</option>
+          }
+        </select>
+      </label>
+      <label>До
+        <select name="to" required>
+          <option value="">Град или автогара</option>
+          @foreach (var city in Model.Cities)
+          {
+              <option value="@city.Code">@city.CityName (@city.Code)</option>
+          }
+        </select>
+      </label>
+      <label>Заминаване<input type="date" name="date" value="2026-06-25" required /></label>
+      <label>Връщане<input type="date" name="returnDate" value="2026-06-28" /></label>
+      <label>Пътници<input type="number" name="passengers" value="1" min="1" max="9" /></label>
+      <button class="primary" type="submit">Търси маршрут</button>
+    </div>
+  </form>
+</section>
+
+<section class="section">
+  <div class="section-title">
+    <div>
+      <span class="eyebrow">ИЗГОДНИ ПРЕДЛОЖЕНИЯ</span>
+      <h2>Популярни автобусни маршрути</h2>
+    </div>
+    <a asp-controller="Trips" asp-action="Index">Виж всички</a>
+  </div>
+  <div class="trip-grid">
+    @foreach (var trip in Model.FeaturedTrips)
+    {
+      <article class="trip-card">
+        <div class="trip-top"><span>@trip.Carrier.Name</span><b>@trip.TripCode</b></div>
+        <div class="route">
+          <div><strong>@trip.DepartureCity.Code</strong><small>@trip.DepartureTime.ToString("HH:mm")</small></div>
+          <div class="route-mid">BUS<hr /><small>@(trip.HasIntermediateStops ? "с междинни спирки" : "директен")</small></div>
+          <div><strong>@trip.ArrivalCity.Code</strong><small>@trip.ArrivalTime.ToString("HH:mm")</small></div>
+        </div>
+        <div class="price"><span>от</span><b>@trip.Price.ToString("0") лв.</b><a asp-controller="Tickets" asp-action="Book" asp-route-tripId="@trip.Id">Избери</a></div>
+      </article>
+    }
+  </div>
+  <div class="stats">
+    <div><b>@Model.TripCount+</b><span>налични пътувания</span></div>
+    <div><b>@Model.Cities.Count</b><span>автогари</span></div>
+    <div><b>@Model.Carriers.Count</b><span>превозвачи</span></div>
+    <div><b>@Model.TicketCount</b><span>билети</span></div>
+  </div>
+</section>

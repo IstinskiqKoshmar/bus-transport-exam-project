@@ -1,3 +1,15 @@
 @model IEnumerable<City>
-@{ ViewData["Title"] = "????????"; }
-<section class="page-head"><span class="eyebrow">????????? ?????</span><h1>???????? ? ???????</h1><p>??????? ? ?????? ????? ? ????????? BusLine.</p></section><section class="content-wrap"><div class="info-grid">@foreach(var city in Model){<article><span class="city-code">@city.Code</span><h3>@city.CityName</h3><p>@city.Name</p><small>@city.Country ? @city.BusStation</small></article>}</div></section>
+@{ ViewData["Title"] = "Автогари"; }
+<section class="page-head">
+  <span class="eyebrow">МАРШРУТНА МРЕЖА</span>
+  <h1>Автогари и градове</h1>
+  <p>Начални и крайни точки в системата BusLine.</p>
+</section>
+<section class="content-wrap">
+  <div class="info-grid">
+  @foreach (var city in Model)
+  {
+    <article><span class="city-code">@city.Code</span><h3>@city.CityName</h3><p>@city.Name</p><small>@city.Country · @city.BusStation</small></article>
+  }
+  </div>
+</section>

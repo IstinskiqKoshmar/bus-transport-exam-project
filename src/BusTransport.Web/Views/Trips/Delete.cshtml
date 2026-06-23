@@ -1,3 +1,9 @@
 @model Trip
-@{ ViewData["Title"] = "?????????"; }
-<section class="page-head compact"><span class="eyebrow">????????????</span><h1>?? ?????? ?? @Model.TripCode?</h1></section><form asp-action="Delete" method="post" class="form-page"><input asp-for="Id" type="hidden"/><p>???????: @Model.DepartureCity.CityName ? @Model.ArrivalCity.CityName</p><button class="primary">??????</button> <a class="secondary" asp-action="Index">?????</a></form>
+@{ ViewData["Title"] = "Изтриване"; }
+<section class="page-head compact"><span class="eyebrow">ПОТВЪРЖДЕНИЕ</span><h1>Да изтрия ли @Model.TripCode?</h1></section>
+<form asp-action="Delete" method="post" class="form-page">
+  <input asp-for="Id" type="hidden" />
+  <p>Маршрут: @Model.DepartureCity.CityName - @Model.ArrivalCity.CityName</p>
+  <button class="primary">Изтрий</button>
+  <a class="secondary" asp-action="Index">Отказ</a>
+</form>

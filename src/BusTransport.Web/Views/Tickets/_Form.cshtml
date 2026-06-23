@@ -1,2 +1,16 @@
 @model Ticket
-<div asp-validation-summary="ModelOnly" class="validation"></div><div class="form-grid"><label>???<input asp-for="TicketCode"/></label><label>??????<select asp-for="PassengerId" asp-items="ViewBag.PassengerId"></select></label><label>???????<select asp-for="TripId" asp-items="ViewBag.TripId"></select></label><label>???? ???????<input asp-for="PassengerCount"/></label><label>?????<input asp-for="SeatNumber"/></label><label>???????<select asp-for="PaymentMethod"><option>?????</option><option>??????</option><option>? ????</option></select></label><label>????<input asp-for="TicketDate" type="datetime-local"/></label><label>???? ????<input asp-for="TotalPrice" type="number" step="0.01"/></label><label>??????<select asp-for="Status"><option>??????????</option><option>??????</option><option>?????????</option><option>???????</option></select></label><label class="wide">???????<textarea asp-for="Notes"></textarea></label></div><button class="primary">??????</button> <a class="secondary" asp-action="Index">?????</a>
+<div asp-validation-summary="ModelOnly" class="validation"></div>
+<div class="form-grid">
+  <label>Код<input asp-for="TicketCode" /></label>
+  <label>Пътник<select asp-for="PassengerId" asp-items="ViewBag.PassengerId"></select></label>
+  <label>Маршрут<select asp-for="TripId" asp-items="ViewBag.TripId"></select></label>
+  <label>Брой пътници<input asp-for="PassengerCount" /></label>
+  <label>Място<input asp-for="SeatNumber" /></label>
+  <label>Плащане<select asp-for="PaymentMethod"><option>Карта</option><option>Онлайн</option><option>В брой</option></select></label>
+  <label>Дата<input asp-for="TicketDate" type="datetime-local" /></label>
+  <label>Обща цена<input asp-for="TotalPrice" type="number" step="0.01" /></label>
+  <label>Статус<select asp-for="Status"><option>Резервиран</option><option>Платен</option><option>Използван</option><option>Отменен</option></select></label>
+  <label class="wide">Бележки<textarea asp-for="Notes"></textarea></label>
+</div>
+<button class="primary">Запази</button>
+<a class="secondary" asp-action="Index">Отказ</a>

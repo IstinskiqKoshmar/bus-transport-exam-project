@@ -1,3 +1,4 @@
 @model BusTransport.Core.Models.Ticket
-@{ ViewData["Title"] = "???????? ?? ?????"; }
-<section class="page-head compact"><span class="eyebrow">?????</span><h1>???????? ?? ?????</h1></section><form asp-action="Edit" method="post" class="form-page"><input asp-for="Id" type="hidden"/><partial name="_Form" model="Model" /></form>
+@{ ViewData["Title"] = "Редакция на билет"; }
+<section class="page-head compact"><span class="eyebrow">АДМИН</span><h1>Редакция на билет</h1></section>
+<form asp-action="Edit" method="post" class="form-page"><input asp-for="Id" type="hidden" /><partial name="_Form" model="Model" /></form>

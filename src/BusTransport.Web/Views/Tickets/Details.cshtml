@@ -1,3 +1,26 @@
 @model BusTransport.Core.Models.Ticket
-@{ ViewData["Title"] = "??????? ?? ?????"; }
-<section class="page-head compact"><span class="eyebrow">?????????? ?????</span><h1>@Model.TicketCode</h1><p>@Model.Passenger.FullName ? @Model.Status</p></section><section class="ticket-layout"><aside class="trip-summary"><span>@Model.Trip.Carrier.Name</span><h2>@Model.Trip.DepartureCity.CityName ? @Model.Trip.ArrivalCity.CityName</h2><p>@Model.Trip.DepartureTime.ToString("dd.MM.yyyy HH:mm")</p><hr/><div><span>?????</span><b>@Model.SeatNumber</b></div><div><span>???????</span><b>@Model.PassengerCount</b></div><div><span>???????</span><b>@Model.PaymentMethod</b></div><div><span>????</span><b>@Model.TotalPrice.ToString("0.00") ??.</b></div></aside><div class="form-page"><h2>QR / ????? ?? ?????</h2><div class="qr">@Model.TicketCode</div><p>@Model.Notes</p><a class="secondary" asp-action="Index">?????</a></div></section>
+@{ ViewData["Title"] = "Детайли за билет"; }
+
+<section class="page-head compact">
+  <span class="eyebrow">ЕЛЕКТРОНЕН БИЛЕТ</span>
+  <h1>@Model.TicketCode</h1>
+  <p>@Model.Passenger.FullName · @Model.Status</p>
+</section>
+<section class="ticket-layout">
+  <aside class="trip-summary">
+    <span>@Model.Trip.Carrier.Name</span>
+    <h2>@Model.Trip.DepartureCity.CityName - @Model.Trip.ArrivalCity.CityName</h2>
+    <p>@Model.Trip.DepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+    <hr />
+    <div><span>Място</span><b>@Model.SeatNumber</b></div>
+    <div><span>Пътници</span><b>@Model.PassengerCount</b></div>
+    <div><span>Плащане</span><b>@Model.PaymentMethod</b></div>
+    <div><span>Цена</span><b>@Model.TotalPrice.ToString("0.00") лв.</b></div>
+  </aside>
+  <div class="form-page">
+    <h2>QR / номер на билет</h2>
+    <div class="qr">@Model.TicketCode</div>
+    <p>@Model.Notes</p>
+    <a class="secondary" asp-action="Index">Назад</a>
+  </div>
+</section>

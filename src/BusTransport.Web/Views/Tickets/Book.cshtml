@@ -1,4 +1,37 @@
 @model TicketRequestViewModel
-@{ ViewData["Title"] = "??????????"; }
-<section class="page-head compact"><span class="eyebrow">?????????? ?? ?????</span><h1>????? ?? ???????</h1></section>
-<section class="ticket-layout"><aside class="trip-summary"><span>@Model.Trip.Carrier.Name</span><h2>@Model.Trip.DepartureCity.Code ? @Model.Trip.ArrivalCity.Code</h2><p>@Model.Trip.DepartureTime.ToString("dd.MM.yyyy ? HH:mm") - @Model.Trip.ArrivalTime.ToString("HH:mm")</p><hr/><div><span>???????</span><b>@Model.Trip.TripCode</b></div><div><span>???????</span><b>@Model.Trip.BusNumber</b></div><div><span>???????? ?????</span><b>@Model.Trip.AvailableSeats</b></div><div><span>???? ?? ?????</span><b>@Model.Trip.Price.ToString("0.00") ??.</b></div></aside><form method="post" class="form-page"><input asp-for="TripId" type="hidden"/><div asp-validation-summary="ModelOnly" class="validation"></div><div class="form-grid"><label>??? ? ???????<input asp-for="FullName" required/></label><label>?????<input asp-for="Email" type="email" required/></label><label>???????<input asp-for="Phone" required/></label><label>????? ?? ????????<input asp-for="DocumentNumber" required/></label><label>????<input asp-for="City" required/></label><label>???? ?? ???????<input asp-for="BirthDate" type="date" required/></label><label>???? ???????<input asp-for="PassengerCount" type="number" min="1" max="9"/></label><label>?????<input asp-for="SeatNumber" required/></label><label>???????<select asp-for="PaymentMethod"><option>?????</option><option>??????</option><option>? ????</option></select></label><label class="wide">???????<textarea asp-for="Notes"></textarea></label></div><button class="primary">???????? ????????????</button></form></section>
+@{ ViewData["Title"] = "Резервация"; }
+
+<section class="page-head compact">
+  <span class="eyebrow">РЕЗЕРВАЦИЯ НА БИЛЕТ</span>
+  <h1>Данни за пътника</h1>
+</section>
+
+<section class="ticket-layout">
+  <aside class="trip-summary">
+    <span>@Model.Trip.Carrier.Name</span>
+    <h2>@Model.Trip.DepartureCity.Code - @Model.Trip.ArrivalCity.Code</h2>
+    <p>@Model.Trip.DepartureTime.ToString("dd.MM.yyyy · HH:mm") - @Model.Trip.ArrivalTime.ToString("HH:mm")</p>
+    <hr />
+    <div><span>Маршрут</span><b>@Model.Trip.TripCode</b></div>
+    <div><span>Автобус</span><b>@Model.Trip.BusNumber</b></div>
+    <div><span>Свободни места</span><b>@Model.Trip.AvailableSeats</b></div>
+    <div><span>Цена за човек</span><b>@Model.Trip.Price.ToString("0.00") лв.</b></div>
+  </aside>
+  <form method="post" class="form-page">
+    <input asp-for="TripId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="validation"></div>
+    <div class="form-grid">
+      <label>Име и фамилия<input asp-for="FullName" required /></label>
+      <label>Имейл<input asp-for="Email" type="email" required /></label>
+      <label>Телефон<input asp-for="Phone" required /></label>
+      <label>Номер на документ<input asp-for="DocumentNumber" required /></label>
+      <label>Град<input asp-for="City" required /></label>
+      <label>Дата на раждане<input asp-for="BirthDate" type="date" required /></label>
+      <label>Брой пътници<input asp-for="PassengerCount" type="number" min="1" max="9" /></label>
+      <label>Място<input asp-for="SeatNumber" required /></label>
+      <label>Плащане<select asp-for="PaymentMethod"><option>Карта</option><option>Онлайн</option><option>В брой</option></select></label>
+      <label class="wide">Бележки<textarea asp-for="Notes"></textarea></label>
+    </div>
+    <button class="primary">Потвърди резервацията</button>
+  </form>
+</section>

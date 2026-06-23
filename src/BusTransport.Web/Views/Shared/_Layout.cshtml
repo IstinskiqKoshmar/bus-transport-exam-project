@@ -1,4 +1,26 @@
 <!DOCTYPE html>
 <html lang="bg">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>@ViewData["Title"] - ????????? ???????</title><link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/></head>
-<body><header class="topbar"><a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">??</span> BusLine</a><nav><a asp-controller="Home" asp-action="Index">???????</a><a asp-controller="Trips" asp-action="Index">??????????</a><a asp-controller="Tickets" asp-action="Index">????? ??????</a><a asp-controller="Cities" asp-action="Index">????????</a><a asp-controller="Carriers" asp-action="Index">??????????</a></nav></header><main>@RenderBody()</main><footer><div><strong>BusLine</strong><br/>?????????? ?????????? ????????</div><div>??????? ??????? ? XI ? ? 2026</div></footer></body></html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Автобусни превози</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">B</span> BusLine</a>
+    <nav>
+        <a asp-controller="Home" asp-action="Index">Търсене</a>
+        <a asp-controller="Trips" asp-action="Index">Разписание</a>
+        <a asp-controller="Tickets" asp-action="Index">Моите билети</a>
+        <a asp-controller="Cities" asp-action="Index">Автогари</a>
+        <a asp-controller="Carriers" asp-action="Index">Превозвачи</a>
+    </nav>
+</header>
+<main>@RenderBody()</main>
+<footer>
+    <div><strong>BusLine</strong><br />Приложение „Автобусни превози“</div>
+    <div>Богомил Иринчев · XI Е · 2026</div>
+</footer>
+</body>
+</html>

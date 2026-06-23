@@ -1,3 +1,26 @@
 @model Trip
-@{ ViewData["Title"] = "??????? ?? ????????"; }
-<section class="page-head compact"><span class="eyebrow">??????? ?? ???????</span><h1>@Model.DepartureCity.CityName ? @Model.ArrivalCity.CityName</h1><p>@Model.Carrier.Name ? @Model.TripCode</p></section><section class="ticket-layout"><aside class="trip-summary"><span>@Model.Status</span><h2>@Model.DepartureTime.ToString("HH:mm") - @Model.ArrivalTime.ToString("HH:mm")</h2><p>@Model.DepartureTime.ToString("dd.MM.yyyy")</p><hr/><div><span>???????</span><b>@Model.BusNumber</b></div><div><span>?????????</span><b>@Model.Platform</b></div><div><span>???????? ?????</span><b>@Model.AvailableSeats</b></div><div><span>????</span><b>@Model.Price.ToString("0.00") ??.</b></div></aside><div class="form-page"><h2>???????? ??????</h2><p>@Model.IntermediateStops</p><a class="primary small" asp-controller="Tickets" asp-action="Book" asp-route-tripId="@Model.Id">?????????? ?????</a> <a class="secondary" asp-action="Index">?????</a></div></section>
+@{ ViewData["Title"] = "Детайли за пътуване"; }
+
+<section class="page-head compact">
+  <span class="eyebrow">ДЕТАЙЛИ ЗА МАРШРУТ</span>
+  <h1>@Model.DepartureCity.CityName - @Model.ArrivalCity.CityName</h1>
+  <p>@Model.Carrier.Name · @Model.TripCode</p>
+</section>
+<section class="ticket-layout">
+  <aside class="trip-summary">
+    <span>@Model.Status</span>
+    <h2>@Model.DepartureTime.ToString("HH:mm") - @Model.ArrivalTime.ToString("HH:mm")</h2>
+    <p>@Model.DepartureTime.ToString("dd.MM.yyyy")</p>
+    <hr />
+    <div><span>Автобус</span><b>@Model.BusNumber</b></div>
+    <div><span>Платформа</span><b>@Model.Platform</b></div>
+    <div><span>Свободни места</span><b>@Model.AvailableSeats</b></div>
+    <div><span>Цена</span><b>@Model.Price.ToString("0.00") лв.</b></div>
+  </aside>
+  <div class="form-page">
+    <h2>Междинни спирки</h2>
+    <p>@Model.IntermediateStops</p>
+    <a class="primary small" asp-controller="Tickets" asp-action="Book" asp-route-tripId="@Model.Id">Резервирай билет</a>
+    <a class="secondary" asp-action="Index">Назад</a>
+  </div>
+</section>

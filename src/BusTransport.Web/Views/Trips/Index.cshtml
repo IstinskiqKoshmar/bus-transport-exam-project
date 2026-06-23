@@ -1,3 +1,39 @@
 @model IEnumerable<Trip>
-@{ ViewData["Title"] = "??????????"; }
-<section class="page-head"><span class="eyebrow">?????????? ? ??????</span><h1>?????? ????????? ?????????</h1><p>??????????????? ?????? ?? ?????????? ?? ????????, ??????, ????? ? ???????.</p><a class="primary small" asp-action="Create">+ ?????? ????????</a></section><section class="content-wrap"><div class="status-links"><a asp-action="Index">??????</a><a asp-action="Index" asp-route-status="?? ??????????">?? ??????????</a><a asp-action="Index" asp-route-status="????????">?????????</a><a asp-action="Index" asp-route-status="???????">????????</a><a asp-action="Index" asp-route-status="??????????">???????????</a></div><div class="table-wrap"><table><thead><tr><th>???</th><th>???????</th><th>????????</th><th>?????????</th><th>????</th><th>?????</th><th>??????</th><th></th></tr></thead><tbody>@foreach(var trip in Model){<tr><td><b>@trip.TripCode</b><small>@trip.BusNumber</small></td><td>@trip.DepartureCity.Code ? @trip.ArrivalCity.Code</td><td>@trip.DepartureTime.ToString("dd.MM HH:mm")</td><td>@trip.Carrier.Name</td><td>@trip.Price.ToString("0") ??.</td><td>@trip.AvailableSeats</td><td><span class="status">@trip.Status</span></td><td class="actions"><a asp-action="Details" asp-route-id="@trip.Id">???????</a><a asp-action="Edit" asp-route-id="@trip.Id">????????</a><a asp-action="Delete" asp-route-id="@trip.Id">?????????</a></td></tr>}</tbody></table></div></section>
+@{ ViewData["Title"] = "Разписание"; }
+
+<section class="page-head">
+  <span class="eyebrow">РАЗПИСАНИЕ И СТАТУС</span>
+  <h1>Всички автобусни пътувания</h1>
+  <p>Административен изглед за управление на маршрути, часове, места и статуси.</p>
+  <a class="primary small" asp-action="Create">+ Добави пътуване</a>
+</section>
+
+<section class="content-wrap">
+  <div class="status-links">
+    <a asp-action="Index">Всички</a>
+    <a asp-action="Index" asp-route-status="По разписание">По разписание</a>
+    <a asp-action="Index" asp-route-status="Закъснял">Закъснели</a>
+    <a asp-action="Index" asp-route-status="Отменен">Отменени</a>
+    <a asp-action="Index" asp-route-status="Пристигнал">Пристигнали</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Код</th><th>Маршрут</th><th>Тръгване</th><th>Превозвач</th><th>Цена</th><th>Места</th><th>Статус</th><th></th></tr></thead>
+      <tbody>
+      @foreach (var trip in Model)
+      {
+        <tr>
+          <td><b>@trip.TripCode</b><small>@trip.BusNumber</small></td>
+          <td>@trip.DepartureCity.Code - @trip.ArrivalCity.Code</td>
+          <td>@trip.DepartureTime.ToString("dd.MM HH:mm")</td>
+          <td>@trip.Carrier.Name</td>
+          <td>@trip.Price.ToString("0") лв.</td>
+          <td>@trip.AvailableSeats</td>
+          <td><span class="status">@trip.Status</span></td>
+          <td class="actions"><a asp-action="Details" asp-route-id="@trip.Id">Преглед</a><a asp-action="Edit" asp-route-id="@trip.Id">Редакция</a><a asp-action="Delete" asp-route-id="@trip.Id">Изтриване</a></td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</section>

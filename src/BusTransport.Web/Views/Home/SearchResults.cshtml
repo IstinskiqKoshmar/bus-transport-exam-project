@@ -1,6 +1,48 @@
 @model SearchResultsViewModel
-@{ ViewData["Title"] = "?????????"; }
-<section class="page-head"><span class="eyebrow">????????? ?? ???????</span><h1>@Model.From ? @Model.To</h1><p>@Model.Date.ToString("dd.MM.yyyy") ? @Model.Passengers ??????/???????</p></section>
-<section class="filters"><form asp-action="Search" method="get"><input type="hidden" name="from" value="@Model.From"/><input type="hidden" name="to" value="@Model.To"/><input type="hidden" name="date" value="@Model.Date.ToString("yyyy-MM-dd")"/><input type="hidden" name="returnDate" value="@Model.ReturnDate?.ToString("yyyy-MM-dd")"/><input type="hidden" name="passengers" value="@Model.Passengers"/><input type="hidden" name="tripType" value="@Model.TripType"/><label>?????????<select name="sort"><option value="price" selected="@(Model.Sort == "price")">???-????? ????</option><option value="duration" selected="@(Model.Sort == "duration")">???-?????? ?????</option><option value="departure" selected="@(Model.Sort == "departure")">???-????? ????????</option></select></label><label>?????????<select name="carrierId"><option value="">??????</option>@foreach(var carrier in Model.Carriers){<option value="@carrier.Id" selected="@(Model.CarrierId == carrier.Id)">@carrier.Name</option>}</select></label><label class="check"><input type="checkbox" name="directOnly" value="true" checked="@Model.DirectOnly"/> ???? ????????</label><button class="primary" type="submit">???????</button></form></section>
+@{ ViewData["Title"] = "Резултати"; }
+
+<section class="page-head">
+  <span class="eyebrow">РЕЗУЛТАТИ ОТ ТЪРСЕНЕ</span>
+  <h1>@Model.From - @Model.To</h1>
+  <p>@Model.Date.ToString("dd.MM.yyyy") · @Model.Passengers пътник/пътници</p>
+</section>
+
+<section class="filters">
+  <form asp-action="Search" method="get">
+    <input type="hidden" name="from" value="@Model.From" />
+    <input type="hidden" name="to" value="@Model.To" />
+    <input type="hidden" name="date" value="@Model.Date.ToString("yyyy-MM-dd")" />
+    <input type="hidden" name="returnDate" value="@Model.ReturnDate?.ToString("yyyy-MM-dd")" />
+    <input type="hidden" name="passengers" value="@Model.Passengers" />
+    <input type="hidden" name="tripType" value="@Model.TripType" />
+    <label>Сортиране
+      <select name="sort">
+        <option value="price" selected="@(Model.Sort == "price")">Най-ниска цена</option>
+        <option value="duration" selected="@(Model.Sort == "duration")">Най-кратко време</option>
+        <option value="departure" selected="@(Model.Sort == "departure")">Най-ранно тръгване</option>
+      </select>
+    </label>
+    <label>Превозвач
+      <select name="carrierId">
+        <option value="">Всички</option>
+        @foreach (var carrier in Model.Carriers)
+        {
+            <option value="@carrier.Id" selected="@(Model.CarrierId == carrier.Id)">@carrier.Name</option>
+        }
+      </select>
+    </label>
+    <label class="check"><input type="checkbox" name="directOnly" value="true" checked="@Model.DirectOnly" /> Само директни</label>
+    <button class="primary" type="submit">Приложи</button>
+  </form>
+</section>
+
 <partial name="_TripResults" model="Model.OutboundTrips" />
-@if (Model.TripType == "roundtrip") { <section class="page-head compact"><span class="eyebrow">??????? ???????</span><h2>@Model.To ? @Model.From</h2></section><partial name="_TripResults" model="Model.ReturnTrips" /> }
+
+@if (Model.TripType == "roundtrip")
+{
+  <section class="page-head compact">
+    <span class="eyebrow">ОБРАТЕН МАРШРУТ</span>
+    <h2>@Model.To - @Model.From</h2>
+  </section>
+  <partial name="_TripResults" model="Model.ReturnTrips" />
+}
