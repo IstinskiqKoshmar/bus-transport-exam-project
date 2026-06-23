@@ -1,0 +1,8 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+src/BusTransport.Web/App_Data/
+artifacts/
+.nuget-local-feed/
